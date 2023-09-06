@@ -1,0 +1,17 @@
+{
+  "name": "222",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "Sujit Sarker",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.37.1"
+  },
+  "dependencies": {
+    "@cliqz/adblocker-playwright": "^1.26.6",
+    "@cliqz/adblocker-webextension": "^1.26.6"
+  }
+}
