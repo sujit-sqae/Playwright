@@ -25,7 +25,6 @@ test('RegisterWhileCheckout', async () => {
   await page.goto('https://automationexercise.com/');
 
   if(timeout){
-    //await page.locator('x-pw-pointer').click();
     await page.goBack();
   };
 
@@ -41,7 +40,8 @@ test('RegisterWhileCheckout', async () => {
   await page.getByRole('link', { name: 'View Cart' }).click();
 
   //Verify that cart page is displayed
-  await page.getByText('Shopping Cart').click();
+  const element1 = page.getByText('Shopping Cart');
+  expect(element1 !== undefined ).toBeTruthy();
 
   //Click Proceed To Checkout
   await page.getByText('Proceed To Checkout').click();
@@ -82,16 +82,15 @@ test('RegisterWhileCheckout', async () => {
   await page.getByRole('button', { name: 'Create Account' }).click();
 
   //Verify 'ACCOUNT CREATED!' and click 'Continue' button
-  await page.getByText('Account Created!').click();
+  const element2 = page.getByText('Account Created!');
+  expect(element2 !== undefined ).toBeTruthy();
 
   await page.getByRole('link', { name: 'Continue' }).click();
 
   //Verify ' Logged in as username' at top
-  await page.getByText('Logged in as Sujit').click();
+  const element3 = page.getByText('Logged in as Sujit');
+  expect(element3 !== undefined ).toBeTruthy();
   
-  //await page.goBack();
-
-
   //Click 'Cart' button
   await page.getByRole('link', { name: ' Cart' }).click();
   //await page.getByText('Shopping Cart').click();
@@ -100,16 +99,18 @@ test('RegisterWhileCheckout', async () => {
   await page.getByText('Proceed To Checkout').click();
 
   //Verify Address Details and Review Your Order
-  await page.getByText('Your delivery address Mr. Sujit Sarker Kite Games Studio Dhaka New York New York').click();
-  await page.getByText('Your billing address Mr. Sujit Sarker Kite Games Studio Dhaka New York New York ').click();
+  const element4 = await page.getByText('Your delivery address Mr. Sujit Sarker Kite Games Studio Dhaka New York New York');
+  expect(element4 !== undefined ).toBeTruthy();
+
+  const element5 = await page.getByText('Your billing address Mr. Sujit Sarker Kite Games Studio Dhaka New York New York');
+  expect(element5 !== undefined ).toBeTruthy();
+  
   await page.getByRole('heading', { name: 'Review Your Order' }).click();
 
   //Enter description in comment text area and click 'Place Order'
   await page.locator('textarea[name="message"]').click();
   await page.locator('textarea[name="message"]').fill('Place Order');
   await page.getByRole('link', { name: 'Place Order' }).click();
-
-  //await page.goBack();
 
   //Enter payment details: Name on Card, Card Number, CVC, Expiration date
   await page.locator('input[name="name_on_card"]').click();
@@ -125,19 +126,14 @@ test('RegisterWhileCheckout', async () => {
 
   //Click 'Pay and Confirm Order' button
   await page.getByRole('button', { name: 'Pay and Confirm Order' }).click();
-  //await page.waitForTimeout(5000);
 
+  //Verify the success message 
+  const element6 = await page.getByText('Order Placed!');
+  expect(element6 !== undefined ).toBeTruthy();
 
-  //Verify the success message 'Your order has been placed successfully!'
-  //expect(page.locator(".heading1")).toHaveText('Your order has been placed successfully!');
-  
-  //await page.getByText('Your order has been placed successfully!').click();
-
-  await page.getByText('Order Placed!').click();
+  const element7 = await page.getByText('Your order has been placed successfully!');
+  expect(element7 !== undefined ).toBeTruthy();
 
   await browser.close();
 
-  
-
 });
-
